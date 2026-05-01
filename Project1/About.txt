@@ -1,0 +1,5 @@
+*****************************************************************
+
+Create a Expense Tracker program in python that allow the user to record daily expenses and view summaries like total spending , Use concept like (Loops , list , dict , etc....)
+
+*****************************************************************
