@@ -1,58 +1,84 @@
-# Expense Tracker Projects
+import datetime
+import time
 
-expenseList = []  # List of all expenses in form of dictionary
+# Greeting User
+name = input("Welcome.. Please Enter your name: ")
+presenthour = datetime.datetime.now().hour
 
-print("Welcome to Expense Tracker : ")
+if 5 <= presenthour <= 11:
+    print("Good Morning,", name)
 
+elif 11 <= presenthour <= 17:
+    print("Good Afternoon,", name)
+
+elif 17 <= presenthour <= 20:
+    print("Good Evening,", name)
+
+else:
+    print("Good Night,", name)
+
+time.sleep(1)
+
+print("\nNamaste! Welcome to Your ChatBot")
+print("You can ask me basic questions.")
+print("Type 'bye' to exit.\n")
+
+
+# ChatBot Memory
+response = {
+
+    "hello": "Hi! How can I help you?",
+    "hi": "Hello there!",
+    "how are you": "I am fine. Thanks for asking.",
+    "who are you": "I am a Smart AI ChatBot.",
+    "your name": "My name is PyBot.",
+    "motivate me": "Keep going. Small progress every day matters.",
+    "happy": "Great to hear that!",
+    "sad": "Don't worry. Tough times never last.",
+    "python": "Python is a very easy and powerful programming language.",
+    "c++": "C++ is fast and powerful for DSA and system programming.",
+    "java": "Java is widely used in enterprise applications.",
+    "functions kya hote hai": "Functions are reusable blocks of code.",
+    "loop kya hota hai": "Loops are used to repeat tasks.",
+    "array kya hai": "Array stores multiple values in a single variable.",
+    "dsa": "DSA improves problem solving and coding skills.",
+    "ai": "AI means Artificial Intelligence.",
+    "time": f"Current time is {datetime.datetime.now().strftime('%H:%M:%S')}",
+    "date": f"Today's date is {datetime.datetime.now().strftime('%d-%m-%Y')}",
+    "thank you": "You're welcome!",
+    "thanks": "Happy to help.",
+    "bye": "Goodbye! Have a nice day."
+}
+
+
+# Function to Get Response
+def getResponse(userques):
+
+    userques = userques.lower()
+
+    for eachkey in response:
+        if eachkey in userques:
+            return response[eachkey]
+
+    return "I am still learning. Please ask something else."
+
+
+# Chat Loop
 while True:
-    print("\n==== Menu ====")
-    print("1. Add Expense")
-    print("2. View all Expenses")
-    print("3. View total Expense")
-    print("4. Exit")
 
-    choice = int(input("Please Enter your choice: "))
+    UserInput = input("\nYou: ")
 
-    # Add expense
-    if choice == 1:
-        date = input("Enter the date: ")
-        category = input("Enter the category (food , travel , books): ")
-        description = input("Enter short Description: ")
-        amount = float(input("Enter the amount: "))
-
-        expense = {
-            "date": date,
-            "category": category,
-            "description": description,
-            "amount": amount
-        }
-
-        expenseList.append(expense)
-        print("\nThe expense is added successfully")
-
-    # View all expenses
-    elif choice == 2:
-        if len(expenseList) == 0:
-            print("No Expense Added")
-        else:
-            print("==== This is your all Expense ====")
-            count = 1
-            for item in expenseList:
-                print(f"{count} -> {item['date']} , {item['category']} , {item['description']} , {item['amount']}")
-                count += 1
-
-    # View Total spending
-    elif choice == 3:
-        total = 0
-        for item in expenseList:
-            total += item["amount"]
-
-        print("\nTotal Expense:", total)
-
-    # EXIT
-    elif choice == 4:
-        print("Thanks for using the Expense Tracker")
+    # Exit Condition
+    if "bye" in UserInput.lower():
+        print("\nBot is typing...")
+        time.sleep(2)
+        print("Bot:", response["bye"])
         break
 
-    else:
-        print("Invalid Choice.. Try Again....")
+    # Delay Effect
+    print("\nBot is typing...")
+    time.sleep(2)
+
+    # Bot Reply
+    reply = getResponse(UserInput)
+    print("Bot:", reply)
